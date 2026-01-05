@@ -1,1 +1,174 @@
-# kartu-ulang-tahun-syifa
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Syifa!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7dc6f, #bb8fce);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .envelope {
+            width: 200px;
+            height: 150px;
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 50px solid #fff;
+            border-bottom-color: #fff;
+        }
+
+        .envelope::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            border-radius: 10px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            max-width: 600px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            object-fit: cover;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        audio {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" id="envelope"></div>
+        <div class="message" id="message">
+            <div class="slideshow" id="slideshow">
+                <img src="foto-syifa.jpg" alt="Foto Syifa 1" class="slide active">
+                <img src="foto-syifa1.jpg" alt="Foto Syifa 2" class="slide">
+                <img src="foto-syifa2.jpg" alt="Foto Syifa 3" class="slide">
+                <img src="foto-syifa3.jpg" alt="Foto Syifa 4" class="slide">
+            </div>
+            <h1>Selamat Ulang Tahun, Syifa! 🎉🎂</h1>
+            <p>Happy birthday, Syifa 🎉💐</p>
+            <p>Semoga di tahun 2026 semua urusanmu dimudahkan, rezekimu diluaskan, dan hatimu selalu bahagia. Terima kasih sudah menjadi alasanku tersenyum. Aku berharap kita bisa terus bersama, menua dalam cerita yang sama, sampai kapan pun.</p>
+            <p>Dari: Rafli 🎁</p>
+            <audio id="birthdayAudio" controls loop>
+                <source src="musik-ulangtahun.mp3" type="audio/wav">
+                Browser Anda tidak mendukung elemen audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const envelope = document.getElementById('envelope');
+        const message = document.getElementById('message');
+        const audio = document.getElementById('birthdayAudio');
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        envelope.addEventListener('click', () => {
+            message.style.display = 'block';
+            audio.play();
+            startSlideshow();
+        });
+
+        function startSlideshow() {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 3000); // Ganti slide setiap 3 detik
+        }
+    </script>
+</body>
+</html>
